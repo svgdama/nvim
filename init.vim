@@ -40,7 +40,8 @@ Plug 'morhetz/gruvbox'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'leafgarland/typescript-vim'
-Plug 'git@github.com:kien/ctrlp.vim.git'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'mattn/emmet-vim'
 Plug 'fatih/vim-go'
@@ -60,42 +61,35 @@ nmap <leader>pf :CocCommand prettier.formatFile<CR>
 " -------------------------------------------------------------------------------------------------
 
 let mapleader = " "
+imap jj <Esc>
 colorscheme gruvbox
 set background=dark
 set laststatus=2
-
-
 if executable('rg')
     let g:rg_derive_root='true'
 endif
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
 
 " netrw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 2
+let g:netrw_browse_split = 0
 let g:netrw_altv = 1
-let g:netrw_winsize = 25
-let g:NetrwIsOpen=0
+let g:netrw_winsize = 50
+
+nnoremap <leader>pe :Vexplore<CR>
 " end netrw
 
-let g:ctrlp_use_caching = 0
-
-" key mappings
-" https://github.com/erkrnt/awesome-streamerrc/blob/master/ThePrimeagen/.vimrc
-"
 
 " quickfix navigation. helpfull to navigate at ctlp results
 map <C-j> :cnext<CR>
 map <C-k> :cprevious<CR>
 map <C-c> :cclose<CR>
 
-
 "save current buffer
 nnoremap <leader>w :write<cr>
+nnoremap <leader>q :quit<cr>
 nnoremap <leader>d :bd<cr>
-nnoremap <leader>e :edit<CR>
+nnoremap <leader>e :edit<SPACE>
 nnoremap <Tab> :bnext<cr>
 nnoremap <S-Tab> :bprevious<cr>
 nnoremap <leader><leader> <c-^>
@@ -132,11 +126,14 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <Leader>s :Rg<SPACE>
-nnoremap <leader>pe :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <silent> <Leader>+ :vertical resize +10<CR>
 nnoremap <silent> <Leader>- :vertical resize -10<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" fzf
+nnoremap <C-p> :Files<Cr>
+
 
 
 "move to the split in the direction shown, or create a new split
