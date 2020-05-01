@@ -3,6 +3,7 @@ syntax on
 set t_Co=256  " Note: Neovim ignores t_Co and other terminal codes.
 set laststatus=2
 
+set mouse=a
 set hidden
 set noerrorbells
 set tabstop=4 softtabstop=4
@@ -18,7 +19,6 @@ set nobackup
 set undodir=~/.vim/undodir
 set undofile
 set incsearch
-
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -56,6 +56,11 @@ command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 nmap <leader>pf :CocCommand prettier.formatFile<CR>
 " end
 
+" setting up emmet
+" https://github.com/mattn/emmet-vim
+let g:user_emmet_leader_key='<C-SPACE>'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
 
 " -------------------------------------------------------------------------------------------------
 " vim settings
@@ -73,11 +78,15 @@ endif
 " netrw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 0
-let g:netrw_altv = 1
 let g:netrw_winsize = 50
 
-nnoremap <leader>pe :Vexplore<CR>
+" brose_split 0 closes it when open a file
+let g:netrw_browse_split = 0
+
+" this way the netrw holds the file dir as root
+nnoremap <leader>pe :wincmd v<bar> :Ex<CR>
+" nnoremap <leader>pe :Explore<CR>
+
 " end netrw
 
 " quickfix navigation. helpfull to navigate at ctlp results
@@ -130,7 +139,7 @@ vnoremap <leader>r :s/\<<C-r><C-w>\>//g<left><left>
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <Leader>s :Rg<SPACE>
-nnoremap <silent> <Leader>+ :vertical resize +10<CR>
+nnoremap <silent> <Leader>= :vertical resize +10<CR>
 nnoremap <silent> <Leader>- :vertical resize -10<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
