@@ -11,6 +11,7 @@ set expandtab
 set smartindent
 set nu
 set nowrap
+set ignorecase
 set smartcase
 set noswapfile
 set nobackup
@@ -61,7 +62,7 @@ nmap <leader>pf :CocCommand prettier.formatFile<CR>
 " -------------------------------------------------------------------------------------------------
 
 let mapleader = " "
-imap jj <Esc>
+
 colorscheme gruvbox
 set background=dark
 set laststatus=2
@@ -79,13 +80,14 @@ let g:netrw_winsize = 50
 nnoremap <leader>pe :Vexplore<CR>
 " end netrw
 
-
 " quickfix navigation. helpfull to navigate at ctlp results
+" open quickfix is handy in case we want to reuse ripgrep results
 map <C-j> :cnext<CR>
 map <C-k> :cprevious<CR>
 map <C-c> :cclose<CR>
+map <C-n> :copen<CR>
 
-"save current buffer
+" current buffer
 nnoremap <leader>w :write<cr>
 nnoremap <leader>q :quit<cr>
 nnoremap <leader>d :bd<cr>
@@ -93,8 +95,6 @@ nnoremap <leader>e :edit<SPACE>
 nnoremap <Tab> :bnext<cr>
 nnoremap <S-Tab> :bprevious<cr>
 nnoremap <leader><leader> <c-^>
-
-
 
 " autoclose tags
 inoremap <> <><Left>
@@ -105,9 +105,8 @@ inoremap "" ""<Left>
 inoremap '' ''<Left>
 inoremap `` ``<Left>
 
-
-
 " insert mode navigational keys
+imap jj <Esc>
 imap <Up> <Nop>
 imap <Down> <Nop>
 imap <Left> <Nop>
@@ -117,13 +116,18 @@ inoremap <C-j> <Down>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
-
-
-" folder navigation
+" window navigational
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
+
+" find and replace
+nnoremap <leader>r yiw:%s/\<<C-r><C-w>\>//g<left><left>
+vnoremap <leader>r :s/\<<C-r><C-w>\>//g<left><left>
+
+" others
+nnoremap <silent> <C-l> :nohl<CR><C-l>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <Leader>s :Rg<SPACE>
 nnoremap <silent> <Leader>+ :vertical resize +10<CR>
@@ -135,33 +139,10 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <C-p> :Files<Cr>
 
 
-
-"move to the split in the direction shown, or create a new split
-nnoremap <silent> <C-h> :call WinMove('h')<cr>
-nnoremap <silent> <C-j> :call WinMove('j')<cr>
-nnoremap <silent> <C-k> :call WinMove('k')<cr>
-nnoremap <silent> <C-l> :call WinMove('l')<cr>
-
-function! WinMove(key)
-  let t:curwin = winnr()
-  exec "wincmd ".a:key
-  if (t:curwin == winnr())
-    if (match(a:key,'[jk]'))
-      wincmd v
-    else
-      wincmd s
-    endif
-    exec "wincmd ".a:key
-  endif
-endfunction
-
-
-
-
 fun! GoYCM()
-    nnoremap <buffer> <silent> <leader>gd :YcmCompleter GoTo<CR>
-    nnoremap <buffer> <silent> <leader>gr :YcmCompleter GoToReferences<CR>
-    nnoremap <buffer> <silent> <leader>rr :YcmCompleter RefactorRename<space>
+    nnoremap <buffer> <silent> <leader>pd :YcmCompleter GoTo<CR>
+    nnoremap <buffer> <silent> <leader>pr :YcmCompleter GoToReferences<CR>
+    nnoremap <buffer> <silent> <leader>pr :YcmCompleter RefactorRename<space>
 endfun
 
 function! s:check_back_space() abort
@@ -202,11 +183,11 @@ let g:rehash256=1
 " -------------------------------------------------------------------------------------------------
 " vim-go settings
 " -------------------------------------------------------------------------------------------------
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
-autocmd FileType go nmap <leader>i  <Plug>(go-imports)
-autocmd FileType go nmap <leader>pf  :GoFmt<cr>
+autocmd FileType go nmap <leader>gb  <Plug>(go-build)
+autocmd FileType go nmap <leader>gr  <Plug>(go-run)
+autocmd FileType go nmap <leader>gt  <Plug>(go-test)
+autocmd FileType go nmap <leader>gi  <Plug>(go-imports)
+autocmd FileType go nmap <leader>gf  :GoFmt<cr>
 
 let g:go_fmt_command = "goimports"
 let g:go_list_type = "quickfix"
