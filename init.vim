@@ -50,17 +50,20 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
-" using coc integration for prettier format
 " coc-prettier settings
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-nmap <leader>pf :CocCommand prettier.formatFile<CR>
+" using coc integration for prettier format and sql format
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nmap <leader>pf :call CocAction('format')<CR>
 " end
+
+
 
 " setting up emmet
 " https://github.com/mattn/emmet-vim
-let g:user_emmet_leader_key='<C-SPACE>'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+
+
 
 " -------------------------------------------------------------------------------------------------
 " vim settings
@@ -131,12 +134,32 @@ nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 
+function! WinMove(key)
+    let t:curwin = winnr()
+    exec "wincmd ".a:key
+    if (t:curwin == winnr())
+        if (match(a:key,'[jk]'))
+            wincmd v
+        else
+            wincmd s
+        endif
+        exec "wincmd ".a:key
+    endif
+endfunction
+
+"move to the split in the direction shown, or create a new split
+nnoremap <silent> <C-h> :call WinMove('h')<cr>
+nnoremap <silent> <C-j> :call WinMove('j')<cr>
+nnoremap <silent> <C-k> :call WinMove('k')<cr>
+nnoremap <silent> <C-l> :call WinMove('l')<cr>
+
+
 " find and replace
 nnoremap <leader>r yiw:%s/\<<C-r><C-w>\>//g<left><left>
 vnoremap <leader>r :s/\<<C-r><C-w>\>//g<left><left>
 
 " others
-nnoremap <silent> <C-l> :nohl<CR><C-l>
+nnoremap <leader>c :noh<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <Leader>s :Rg<SPACE>
 nnoremap <silent> <Leader>= :vertical resize +10<CR>
@@ -206,4 +229,4 @@ set autowrite
 
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
-let g:go_def_mapping_enabled = 0
+" let g:go_def_mapping_enabled = 0
