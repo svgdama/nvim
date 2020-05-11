@@ -71,6 +71,12 @@ autocmd FileType html,css EmmetInstall
 
 let mapleader = " "
 
+" ESC Key
+imap jj <Esc>
+imap <C-Space> <Esc>
+cmap <C-Space> <C-c>
+vmap <C-Space> <Esc>
+
 colorscheme gruvbox
 set background=dark
 set laststatus=2
@@ -118,7 +124,6 @@ inoremap '' ''<Left>
 inoremap `` ``<Left>
 
 " insert mode navigational keys
-imap jj <Esc>
 imap <Up> <Nop>
 imap <Down> <Nop>
 imap <Left> <Nop>
