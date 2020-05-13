@@ -53,9 +53,8 @@ call plug#end()
 " coc-prettier settings
 " using coc integration for prettier format and sql format
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nmap <leader>pf :call CocAction('format')<CR>
+nmap <leader>f :call CocAction('format')<CR>
 " end
-
 
 
 " setting up emmet
