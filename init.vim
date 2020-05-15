@@ -41,6 +41,7 @@ Plug 'morhetz/gruvbox'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
@@ -56,6 +57,12 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nmap <leader>f :call CocAction('format')<CR>
 " end
 
+" setting typescript
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+" Set jsx-tag colors in vimrc yellow
+hi tsxAttrib guifg=#F8BD7F cterm=italic
+" end
 
 " setting up emmet
 " https://github.com/mattn/emmet-vim
@@ -175,11 +182,11 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <C-p> :Files<Cr>
 
 
-fun! GoYCM()
-    nnoremap <buffer> <silent> <leader>pd :YcmCompleter GoTo<CR>
-    nnoremap <buffer> <silent> <leader>pr :YcmCompleter GoToReferences<CR>
-    nnoremap <buffer> <silent> <leader>pr :YcmCompleter RefactorRename<space>
-endfun
+" fun! GoYCM()
+"     nnoremap <buffer> <silent> <leader>pd :YcmCompleter GoTo<CR>
+"     nnoremap <buffer> <silent> <leader>pr :YcmCompleter GoToReferences<CR>
+"     nnoremap <buffer> <silent> <leader>pr :YcmCompleter RefactorRename<space>
+" endfun
 
 function! s:check_back_space() abort
     let col = col('.') - 1
@@ -187,10 +194,6 @@ function! s:check_back_space() abort
 endfunction
 
 fun! GoCoc()
-    inoremap <buffer> <silent><expr> <TAB>
-                \ pumvisible() ? "\<C-n>" :
-                \ <SID>check_back_space() ? "\<TAB>" :
-                \ coc#refresh()
 
     inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
     inoremap <buffer> <silent><expr> <C-space> coc#refresh()
@@ -210,8 +213,8 @@ fun! TrimWhitespace()
 endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
-autocmd FileType typescript :call GoYCM()
-autocmd FileType cpp,cxx,h,hpp,c :call GoCoc()
+" autocmd FileType typescript :call GoYCM()
+autocmd FileType cpp,cxx,h,hpp,c,go :call GoCoc()
 
 let g:rehash256=1
 
