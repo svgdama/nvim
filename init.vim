@@ -214,7 +214,7 @@ endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
 " autocmd FileType typescript :call GoYCM()
-autocmd FileType cpp,cxx,h,hpp,c,go :call GoCoc()
+autocmd FileType go,typescript.tsx :call GoCoc()
 
 let g:rehash256=1
 
