@@ -54,7 +54,7 @@ call plug#end()
 " coc-prettier settings
 " using coc integration for prettier format and sql format
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nmap <leader>f :call CocAction('format')<CR>
+nmap <leader>gf :call CocAction('format')<CR>
 " end
 
 " setting typescript
@@ -172,7 +172,7 @@ vnoremap <leader>r :s/\<<C-r><C-w>\>//g<left><left>
 " others
 nnoremap <leader>c :noh<CR>
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <Leader>s :Rg<SPACE>
+nnoremap <leader>s :Rg<SPACE>
 nnoremap <silent> <Leader>= :vertical resize +10<CR>
 nnoremap <silent> <Leader>- :vertical resize -10<CR>
 vnoremap J :m '>+1<CR>gv=gv
@@ -180,7 +180,6 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " fzf
 nnoremap <C-p> :Files<Cr>
-
 
 " fun! GoYCM()
 "     nnoremap <buffer> <silent> <leader>pd :YcmCompleter GoTo<CR>
@@ -194,6 +193,10 @@ function! s:check_back_space() abort
 endfunction
 
 fun! GoCoc()
+    inoremap <buffer> <silent><expr> <TAB>
+                \ pumvisible() ? "\<C-n>" :
+                \ <SID>check_back_space() ? "\<TAB>" :
+                \ coc#refresh()
 
     inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
     inoremap <buffer> <silent><expr> <C-space> coc#refresh()
@@ -226,7 +229,7 @@ autocmd FileType go nmap <leader>gb  <Plug>(go-build)
 autocmd FileType go nmap <leader>gr  <Plug>(go-run)
 autocmd FileType go nmap <leader>gt  <Plug>(go-test)
 autocmd FileType go nmap <leader>gi  <Plug>(go-imports)
-autocmd FileType go nmap <leader>gf  :GoFmt<cr>
+" autocmd FileType go nmap <leader>gf  :GoFmt<cr>
 
 let g:go_fmt_command = "goimports"
 let g:go_list_type = "quickfix"
