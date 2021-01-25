@@ -1,7 +1,6 @@
 syntax on
 
 set t_Co=256  " Note: Neovim ignores t_Co and other terminal codes.
-set laststatus=2
 
 set mouse=a
 set hidden
@@ -42,20 +41,14 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'mattn/emmet-vim'
 Plug 'fatih/vim-go'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
-
-" coc-prettier settings
-" using coc integration for prettier format and sql format
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nmap <leader>gf :call CocAction('format')<CR>
-" end
 
 " setting typescript
 " set filetypes as typescript.tsx
@@ -69,12 +62,9 @@ hi tsxAttrib guifg=#F8BD7F cterm=italic
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
-
-
 " -------------------------------------------------------------------------------------------------
 " vim settings
 " -------------------------------------------------------------------------------------------------
-
 let mapleader = " "
 
 " ESC Key
@@ -91,15 +81,17 @@ if executable('rg')
 endif
 
 " netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_winsize = 50
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_winsize = 25
 
 " brose_split 0 closes it when open a file
-let g:netrw_browse_split = 0
+" let g:netrw_browse_split = 0
 
 " this way the netrw holds the file dir as root
-nnoremap <leader>pe :wincmd v<bar> :Ex<CR>
+"nnoremap <leader>pe :wincmd v<bar> :Ex<CR>
+nmap <space>pe :CocCommand explorer<CR>
+
 " nnoremap <leader>pe :Explore<CR>
 
 " end netrw
@@ -164,7 +156,6 @@ nnoremap <silent> <C-j> :call WinMove('j')<cr>
 nnoremap <silent> <C-k> :call WinMove('k')<cr>
 nnoremap <silent> <C-l> :call WinMove('l')<cr>
 
-
 " find and replace
 nnoremap <leader>r yiw:%s/\<<C-r><C-w>\>//g<left><left>
 vnoremap <leader>r :s/\<<C-r><C-w>\>//g<left><left>
@@ -181,12 +172,6 @@ vnoremap K :m '<-2<CR>gv=gv
 " fzf
 nnoremap <C-p> :Files<Cr>
 
-" fun! GoYCM()
-"     nnoremap <buffer> <silent> <leader>pd :YcmCompleter GoTo<CR>
-"     nnoremap <buffer> <silent> <leader>pr :YcmCompleter GoToReferences<CR>
-"     nnoremap <buffer> <silent> <leader>pr :YcmCompleter RefactorRename<space>
-" endfun
-
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
@@ -202,11 +187,20 @@ fun! GoCoc()
     inoremap <buffer> <silent><expr> <C-space> coc#refresh()
 
     " GoTo code navigation.
-    nmap <buffer> <leader>gd <Plug>(coc-defintion)
-    nmap <buffer> <leader>gy <Plug>(coc-type-definition)
-    nmap <buffer> <leader>gi <Plug>(coc-implementation)
-    nmap <buffer> <leader>gr <Plug>(coc-references)
-    nnoremap <buffer> <leader>cr :CocRestart
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+
+    " Remap keys for applying codeAction to the current buffer.
+    nmap <leader>ga  <Plug>(coc-codeaction)
+    " Apply AutoFix to problem on the current line.
+    nmap <leader>qf  <Plug>(coc-fix-current)
+
+    " Use `[g` and `]g` to navigate diagnostics
+    " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+    nmap <silent> [g <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]g <Plug>(coc-diagnostic-next)
 endfun
 
 fun! TrimWhitespace()
@@ -216,8 +210,16 @@ fun! TrimWhitespace()
 endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
-" autocmd FileType typescript :call GoYCM()
 autocmd FileType go,typescript.tsx :call GoCoc()
+
+" coc-prettier settings
+" using coc integration for prettier format and sql format
+ command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+ " Oganize imports when saving a tsx
+nmap <leader>oi :call CocAction('runCommand', 'tsserver.organizeImports')<CR>:Prettier<CR>
+nmap <leader>gf :call CocAction('format')<CR>
+" end
 
 let g:rehash256=1
 
@@ -226,10 +228,10 @@ let g:rehash256=1
 " vim-go settings
 " -------------------------------------------------------------------------------------------------
 autocmd FileType go nmap <leader>gb  <Plug>(go-build)
-autocmd FileType go nmap <leader>gr  <Plug>(go-run)
+autocmd FileType go nmap <leader>rr  <Plug>(go-run)
 autocmd FileType go nmap <leader>gt  <Plug>(go-test)
 autocmd FileType go nmap <leader>gi  <Plug>(go-imports)
-" autocmd FileType go nmap <leader>gf  :GoFmt<cr>
+autocmd FileType go nmap <leader>gf  :GoFmt<cr>
 
 let g:go_fmt_command = "goimports"
 let g:go_list_type = "quickfix"
@@ -239,4 +241,4 @@ set autowrite
 
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
-" let g:go_def_mapping_enabled = 0
+let g:go_def_mapping_enabled = 0

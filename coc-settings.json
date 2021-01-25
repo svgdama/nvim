@@ -6,6 +6,12 @@
       "filetypes": ["go"]
     }
   },
-  "coc.preferences.formatOnSaveFiletypes": ["css", "sql", "json", "typescript"],
-  "prettier.tabWidth": 4
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "sql",
+    "json",
+    "typescriptreact"
+  ],
+  "prettier.tabWidth": 2,
+  "explorer.file.showHiddenFiles": true
 }
