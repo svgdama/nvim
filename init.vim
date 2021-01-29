@@ -32,6 +32,20 @@ set shortmess+=c
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
+let g:coc_global_extensions = [
+\ 'coc-explorer',
+\ 'coc-json',
+\ 'coc-tsserver',
+\ 'coc-html',
+\ 'coc-css',
+\ 'coc-yaml',
+\ 'coc-highlight',
+\ 'coc-prettier',
+\ 'coc-tsserver',
+\ 'coc-sql'
+\ ]
+
+
 
 call plug#begin('~/.vim/plugged')
 
@@ -46,7 +60,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'mattn/emmet-vim'
 Plug 'fatih/vim-go'
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() } }
+" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
 
@@ -80,21 +95,7 @@ if executable('rg')
     let g:rg_derive_root='true'
 endif
 
-" netrw
-" let g:netrw_banner = 0
-" let g:netrw_liststyle = 3
-" let g:netrw_winsize = 25
-
-" brose_split 0 closes it when open a file
-" let g:netrw_browse_split = 0
-
-" this way the netrw holds the file dir as root
-"nnoremap <leader>pe :wincmd v<bar> :Ex<CR>
 nmap <space>pe :CocCommand explorer<CR>
-
-" nnoremap <leader>pe :Explore<CR>
-
-" end netrw
 
 " quickfix navigation. helpfull to navigate at ctlp results
 " open quickfix is handy in case we want to reuse ripgrep results
@@ -242,3 +243,4 @@ set autowrite
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
 let g:go_def_mapping_enabled = 0
+
