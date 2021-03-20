@@ -171,7 +171,13 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " fzf
-nnoremap <C-p> :Files<Cr>
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
+map <C-p> :ProjectFiles<CR>
+" nnoremap <C-p> :Files<Cr>
 
 function! s:check_back_space() abort
     let col = col('.') - 1
