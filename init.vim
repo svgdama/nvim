@@ -80,8 +80,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'mattn/emmet-vim'
 Plug 'fatih/vim-go'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() } }
-" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() } }
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
 
