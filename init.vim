@@ -21,7 +21,7 @@ syntax on
 
 
 set t_Co=256  " Note: Neovim ignores t_Co and other terminal codes.
-
+set clipboard=unnamed
 set mouse=a
 set hidden
 set noerrorbells
@@ -80,8 +80,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'mattn/emmet-vim'
 Plug 'fatih/vim-go'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() } }
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
 
