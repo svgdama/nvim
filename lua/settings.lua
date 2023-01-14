@@ -26,9 +26,12 @@ vim.opt.splitright = true
 vim.g.netrw_browse_split = 0
 --vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
+vim.g.t_Co = 256
+vim.g.syntax = true
 
-vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme gruvbox]])
+--vim.o.background = "dark" -- or "light" for light mode
+--vim.g.gruvbox_transparent_bg = 'yes'
+--vim.cmd([[colorscheme gruvbox]])
 
 --  local utils = require('utils')
 --  utils.create_augroup({

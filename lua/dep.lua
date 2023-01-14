@@ -12,16 +12,22 @@ return require('packer').startup(function(use)
     use('junegunn/fzf.vim')
     use('ray-x/go.nvim')
     use('ray-x/guihua.lua') -- recommanded if need floating window support
-    use('ellisonleao/gruvbox.nvim')
     use("lukas-reineke/indent-blankline.nvim")
+    use({
+        'rose-pine/neovim',
+        as = 'rose-pine',
+        config = function()
+            vim.cmd('colorscheme rose-pine')
+        end
+    })
 
     use {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
             -- LSP Support
-            { 'neovim/nvim-lspconfig' },
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
+            { 'neovim/nvim-lspconfig' },
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },

@@ -83,4 +83,5 @@ utils.map('n', '<C-x>', ':split<cr>', { noremap = true })
 local _, err = pcall(os.execute, 'git rev-parse')
 local fzfcmd = (err == 0) and ':GFiles<cr>' or ':Files<cr>'
 utils.map('n', '<C-p>', fzfcmd)
+utils.map('n', '<C-f>', ':Files<cr>')
 utils.map('n', '<leader>pb', vim.cmd.Buffers)
