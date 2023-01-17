@@ -1,5 +1,5 @@
-vim.g.mapleader = ' ' -- 'vim.g' sets global variables
-local utils = require('utils')
+vim.g.mapleader = " " -- 'vim.g' sets global variables
+local utils = require("utils")
 
 utils.map("n", "<leader>pv", vim.cmd.Ex)
 utils.map({ "i", "v", "c" }, "<C-c>", "<Esc>")
@@ -39,49 +39,42 @@ utils.map("n", "<leader>j", ":lprev<cr>zz")
 
 -- search / replace
 utils.map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-utils.map('n', "<leader>r", [[yiw:%s/\<<C-r><C-w>\>//g<left><left>]])
+utils.map("n", "<leader>r", [[yiw:%s/\<<C-r><C-w>\>//g<left><left>]])
 -- utils.map("n", "<leader>x", ":!chmod +x %<cr>", { silent = true })
 
 --" autoclose tags
-utils.map('i', '<>', "<><Left>")
-utils.map('i', '()', "()<Left>")
-utils.map('i', '{}', "{}<Left>")
-utils.map('i', '[]', "[]<Left>")
-utils.map('i', '""', "\"\"<Left>")
-utils.map('i', '\'\'', "''<Left>")
-utils.map('i', '``', "``<Left>")
+utils.map("i", "<>", "<><Left>")
+utils.map("i", "()", "()<Left>")
+utils.map("i", "{}", "{}<Left>")
+utils.map("i", "[]", "[]<Left>")
+utils.map("i", '""', '""<Left>')
+utils.map("i", "''", "''<Left>")
+utils.map("i", "``", "``<Left>")
 
 -- insert mode navigational keys
-utils.map('i', '<Up>', '<Nop>')
-utils.map('i', '<Down>', '<Nop>')
-utils.map('i', '<Left>', '<Nop>')
-utils.map('i', '<Right>', '<Nop>')
+utils.map("i", "<Up>", "<Nop>")
+utils.map("i", "<Down>", "<Nop>")
+utils.map("i", "<Left>", "<Nop>")
+utils.map("i", "<Right>", "<Nop>")
 -- utils.map('i', '<C-h>', '<Left>', { noremap = true })
 -- utils.map('i', '<C-j>', '<Down>', { noremap = true })
 -- utils.map('i', '<C-k>', '<Up>', { noremap = true })
 -- utils.map('i', '<C-l>', '<Right>', { noremap = true })
 
 -- current buffer
-utils.map('n', '<leader>w', ":write<cr>")
-utils.map('n', '<leader>q', ":quit<cr>")
-utils.map('n', '<leader>d', ":bd<cr>")
-utils.map('n', '<leader>e', ":edit<SPACE>")
-utils.map('n', '<Tab>', ":bnext<cr>")
-utils.map('n', '<S-Tab>', ":bprevious<cr>")
-utils.map('n', '<leader><leader>', "<C-^>")
+utils.map("n", "<leader>w", ":write<cr>")
+utils.map("n", "<leader>q", ":quit<cr>")
+utils.map("n", "<leader>d", ":bd<cr>")
+utils.map("n", "<leader>e", ":edit<SPACE>")
+utils.map("n", "<Tab>", ":bnext<cr>")
+utils.map("n", "<S-Tab>", ":bprevious<cr>")
+utils.map("n", "<leader><leader>", "<C-^>")
 
 -- window navigational
-utils.map('n', '<leader>h', ':wincmd h<cr>', { noremap = true })
-utils.map('n', '<leader>j', ':wincmd j<cr>', { noremap = true })
-utils.map('n', '<leader>k', ':wincmd k<cr>', { noremap = true })
-utils.map('n', '<leader>l', ':wincmd l<cr>', { noremap = true })
-utils.map('n', '<C-c>', ':wincmd c<cr>', { noremap = true })
-utils.map('n', '<C-\\>', ':vsplit<cr>', { noremap = true })
-utils.map('n', '<C-x>', ':split<cr>', { noremap = true })
-
--- FZF mappings
-local _, err = pcall(os.execute, 'git rev-parse')
-local fzfcmd = (err == 0) and ':GFiles<cr>' or ':Files<cr>'
-utils.map('n', '<C-p>', fzfcmd)
-utils.map('n', '<C-f>', ':Files<cr>')
-utils.map('n', '<leader>pb', vim.cmd.Buffers)
+utils.map("n", "<leader>h", ":wincmd h<cr>", { noremap = true })
+utils.map("n", "<leader>j", ":wincmd j<cr>", { noremap = true })
+utils.map("n", "<leader>k", ":wincmd k<cr>", { noremap = true })
+utils.map("n", "<leader>l", ":wincmd l<cr>", { noremap = true })
+utils.map("n", "<C-c>", ":wincmd c<cr>", { noremap = true })
+utils.map("n", "<C-\\>", ":vsplit<cr>", { noremap = true })
+utils.map("n", "<C-x>", ":split<cr>", { noremap = true })

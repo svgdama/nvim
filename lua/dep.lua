@@ -8,8 +8,11 @@ return require('packer').startup(function(use)
     use('vim-airline/vim-airline')
     use('vim-airline/vim-airline-themes')
     use('tpope/vim-fugitive')
-    use('junegunn/fzf')
-    use('junegunn/fzf.vim')
+    use("folke/trouble.nvim")
+    use({
+        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        requires = { { 'nvim-lua/plenary.nvim' } }
+    })
     use('ray-x/go.nvim')
     use('ray-x/guihua.lua') -- recommanded if need floating window support
     use("lukas-reineke/indent-blankline.nvim")
@@ -20,7 +23,7 @@ return require('packer').startup(function(use)
             vim.cmd('colorscheme rose-pine')
         end
     })
-
+    use('jose-elias-alvarez/null-ls.nvim')
     use {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
