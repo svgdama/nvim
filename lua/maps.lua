@@ -36,6 +36,7 @@ utils.map("n", "<leader>f", vim.lsp.buf.format)
 -- utils.map("n", "<C-j>", ":cprev<cr>zz")
 -- utils.map("n", "<leader>k", ":lnext<cr>zz")
 -- utils.map("n", "<leader>j", ":lprev<cr>zz")
+utils.map("n", "<leader>pe", ":NvimTreeToggle<cr>")
 
 -- search / replace
 utils.map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
