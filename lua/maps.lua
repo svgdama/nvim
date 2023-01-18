@@ -32,10 +32,10 @@ utils.map("n", "<leader>f", vim.lsp.buf.format)
 
 -- quickfix navigation. helpfull to navigate at ctlp results
 -- open quickfix is handy in case we want to reuse ripgrep results1
-utils.map("n", "<C-k>", ":cnext<cr>zz")
-utils.map("n", "<C-j>", ":cprev<cr>zz")
-utils.map("n", "<leader>k", ":lnext<cr>zz")
-utils.map("n", "<leader>j", ":lprev<cr>zz")
+-- utils.map("n", "<C-k>", ":cnext<cr>zz")
+-- utils.map("n", "<C-j>", ":cprev<cr>zz")
+-- utils.map("n", "<leader>k", ":lnext<cr>zz")
+-- utils.map("n", "<leader>j", ":lprev<cr>zz")
 
 -- search / replace
 utils.map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -71,10 +71,10 @@ utils.map("n", "<S-Tab>", ":bprevious<cr>")
 utils.map("n", "<leader><leader>", "<C-^>")
 
 -- window navigational
-utils.map("n", "<leader>h", ":wincmd h<cr>", { noremap = true })
-utils.map("n", "<leader>j", ":wincmd j<cr>", { noremap = true })
-utils.map("n", "<leader>k", ":wincmd k<cr>", { noremap = true })
-utils.map("n", "<leader>l", ":wincmd l<cr>", { noremap = true })
+utils.map("n", "<C-h>", ":wincmd h<cr>", { noremap = true })
+utils.map("n", "<C-j>", ":wincmd j<cr>", { noremap = true })
+utils.map("n", "<C-k>", ":wincmd k<cr>", { noremap = true })
+utils.map("n", "<C-l>", ":wincmd l<cr>", { noremap = true })
 utils.map("n", "<C-c>", ":wincmd c<cr>", { noremap = true })
 utils.map("n", "<C-\\>", ":vsplit<cr>", { noremap = true })
 utils.map("n", "<C-x>", ":split<cr>", { noremap = true })

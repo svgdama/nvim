@@ -22,12 +22,15 @@ vim.opt.updatetime = 54
 vim.opt.colorcolumn = "80"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-
-vim.g.netrw_browse_split = 0
---vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
 vim.g.t_Co = 256
 vim.g.syntax = true
+
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+-- vim.g.netrw_browse_split = 0
+-- vim.g.netrw_banner = 0
+-- vim.g.netrw_winsize = 25
 
 --vim.o.background = "dark" -- or "light" for light mode
 --vim.g.gruvbox_transparent_bg = 'yes'

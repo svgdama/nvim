@@ -9,7 +9,6 @@ lsp.ensure_installed({
 	"emmet_ls",
 	"cssls",
 })
-
 -- Fix Undefined global 'vim'
 lsp.configure("sumneko_lua", {
 	settings = {
@@ -20,24 +19,6 @@ lsp.configure("sumneko_lua", {
 		},
 	},
 })
-
---local capabilities = vim.lsp.protocol.make_client_capabilities()
---capabilities.textDocument.completion.completionItem.snippetSupport = true
---lsp.configure('emmet_ls', {
---    setting = {
---        -- on_attach = on_attach,
---        capabilities = capabilities,
---        filetypes = { 'html', 'typescript', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
---        init_options = {
---            html = {
---                options = {
---                    -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
---                    ["bem.enabled"] = true,
---                },
---            },
---        }
---    }
---})
 
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -76,7 +57,13 @@ local add_format_on_save = function(client, bufnr)
 			group = augroup,
 			buffer = bufnr,
 			callback = function()
-				vim.lsp.buf.format({ bufnr = bufnr, async = true })
+				vim.lsp.buf.format({
+					--					filter = function(c)
+					--						-- apply whatever logic you want (in this example, we'll only use null-ls)
+					--						return c.name == "null-ls"
+					--					end,
+					bufnr = bufnr,
+				})
 			end,
 		})
 	end
