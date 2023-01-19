@@ -36,7 +36,6 @@ utils.map("n", "<leader>f", vim.lsp.buf.format)
 -- utils.map("n", "<C-j>", ":cprev<cr>zz")
 -- utils.map("n", "<leader>k", ":lnext<cr>zz")
 -- utils.map("n", "<leader>j", ":lprev<cr>zz")
-utils.map("n", "<leader>pe", ":NvimTreeToggle<cr>")
 
 -- search / replace
 utils.map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -72,6 +71,8 @@ utils.map("n", "<S-Tab>", ":bprevious<cr>")
 utils.map("n", "<leader><leader>", "<C-^>")
 
 -- window navigational
+utils.map("n", "<leader>h", ":wincmd h<cr>", { noremap = true })
+utils.map("n", "<leader>l", ":wincmd l<cr>", { noremap = true })
 utils.map("n", "<C-h>", ":wincmd h<cr>", { noremap = true })
 utils.map("n", "<C-j>", ":wincmd j<cr>", { noremap = true })
 utils.map("n", "<C-k>", ":wincmd k<cr>", { noremap = true })
@@ -79,3 +80,7 @@ utils.map("n", "<C-l>", ":wincmd l<cr>", { noremap = true })
 utils.map("n", "<C-c>", ":wincmd c<cr>", { noremap = true })
 utils.map("n", "<C-\\>", ":vsplit<cr>", { noremap = true })
 utils.map("n", "<C-x>", ":split<cr>", { noremap = true })
+
+-- plugins related maps
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+utils.map("n", "<leader>pe", ":NvimTreeToggle<cr>")
