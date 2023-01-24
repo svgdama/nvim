@@ -27,7 +27,7 @@ utils.map("n", "<leader>Y", [["+Y]])
 -- utils.map({ "n", "v" }, "<leader>d", [["_d]])
 
 utils.map("n", "Q", "<nop>")
--- utils.map("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<cr>")
+utils.map("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<cr>")
 utils.map("n", "<leader>f", vim.lsp.buf.format)
 
 -- quickfix navigation. helpfull to navigate at ctlp results
@@ -40,6 +40,7 @@ utils.map("n", "<leader>f", vim.lsp.buf.format)
 -- search / replace
 utils.map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 utils.map("n", "<leader>r", [[yiw:%s/\<<C-r><C-w>\>//g<left><left>]])
+utils.map("n", "<leader>t", ":set hlsearch!<cr>")
 -- utils.map("n", "<leader>x", ":!chmod +x %<cr>", { silent = true })
 
 --" autoclose tags

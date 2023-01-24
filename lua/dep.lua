@@ -6,9 +6,10 @@ return require("packer").startup(function(use)
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("mbbill/undotree")
 	use("vim-airline/vim-airline")
-	use("vim-airline/vim-airline-themes")
+	--use("vim-airline/vim-airline-themes")
 	use("tpope/vim-fugitive")
 	use("folke/trouble.nvim")
+	use("nvim-lualine/lualine.nvim")
 	use({
 		"nvim-tree/nvim-tree.lua",
 		requires = {
@@ -24,7 +25,8 @@ return require("packer").startup(function(use)
 	use("ray-x/go.nvim")
 	use("ray-x/guihua.lua") -- recommanded if need floating window support
 	use("lukas-reineke/indent-blankline.nvim")
-	use({ "rose-pine/neovim", as = "rose-pine" })
+	-- use({ "rose-pine/neovim", as = "rose-pine" })
+	use("Mofiqul/vscode.nvim")
 	use("jose-elias-alvarez/null-ls.nvim")
 	use({
 		"VonHeikemen/lsp-zero.nvim",
