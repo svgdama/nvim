@@ -27,7 +27,7 @@ utils.map("n", "<leader>Y", [["+Y]])
 -- utils.map({ "n", "v" }, "<leader>d", [["_d]])
 
 utils.map("n", "Q", "<nop>")
-utils.map("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<cr>")
+-- utils.map("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<cr>")
 utils.map("n", "<leader>f", vim.lsp.buf.format)
 
 -- quickfix navigation. helpfull to navigate at ctlp results

@@ -6,7 +6,6 @@ return require("packer").startup(function(use)
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("mbbill/undotree")
 	use("vim-airline/vim-airline")
-	--use("vim-airline/vim-airline-themes")
 	use("tpope/vim-fugitive")
 	use("folke/trouble.nvim")
 	use("nvim-lualine/lualine.nvim")
@@ -22,10 +21,9 @@ return require("packer").startup(function(use)
 		tag = "0.1.0",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
-	use("ray-x/go.nvim")
-	use("ray-x/guihua.lua") -- recommanded if need floating window support
+	--	use("ray-x/go.nvim")
+	--	use("ray-x/guihua.lua") -- recommanded if need floating window support
 	use("lukas-reineke/indent-blankline.nvim")
-	-- use({ "rose-pine/neovim", as = "rose-pine" })
 	use("Mofiqul/vscode.nvim")
 	use("jose-elias-alvarez/null-ls.nvim")
 	use({
@@ -35,7 +33,6 @@ return require("packer").startup(function(use)
 			{ "williamboman/mason.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
 			{ "neovim/nvim-lspconfig" },
-
 			-- Autocompletion
 			{ "hrsh7th/nvim-cmp" },
 			{ "hrsh7th/cmp-buffer" },
@@ -43,13 +40,11 @@ return require("packer").startup(function(use)
 			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lua" },
-
 			-- Snippets
 			{ "L3MON4D3/LuaSnip" },
 			{ "rafamadriz/friendly-snippets" },
 		},
 	})
-
 	use("folke/zen-mode.nvim")
 	use("github/copilot.vim")
 end)

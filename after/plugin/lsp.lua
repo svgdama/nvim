@@ -20,6 +20,17 @@ lsp.configure("sumneko_lua", {
 	},
 })
 
+lsp.configure("gopls", {
+	settings = {
+		gopls = {
+			analyses = {
+				unusedparams = true,
+			},
+			staticcheck = true,
+		},
+	},
+})
+
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -58,10 +69,6 @@ local add_format_on_save = function(client, bufnr)
 			buffer = bufnr,
 			callback = function()
 				vim.lsp.buf.format({
-					--					filter = function(c)
-					--						-- apply whatever logic you want (in this example, we'll only use null-ls)
-					--						return c.name == "null-ls"
-					--					end,
 					bufnr = bufnr,
 				})
 			end,
@@ -76,8 +83,7 @@ lsp.on_attach(function(client, bufnr)
 	end
 
 	add_format_on_save(client, bufnr)
-
-	if client.name == "tsserver" then
+	if client.name == "tsserver" or client.name == "gopls" then
 		-- disable server formatting in favor of prettier
 		-- client.server_capabilities.document_formatting = false
 		client.server_capabilities.documentFormattingProvider = false
